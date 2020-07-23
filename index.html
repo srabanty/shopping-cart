@@ -26,10 +26,10 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button id="phoneMinus"  class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="numOfPhone" type="text" class="form-control text-center" value="1">
+                           <input id="numOfPhone" type="text" class="form-control text-center" value="0">
                            <button id="phonePlus"  class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$ <span id="phonePrice">1219</span></h5>
+                        <h5>$ <span id="phonePrice">0</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -44,11 +44,11 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button id="cartMinus" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="numOfCase" type="text" class="form-control text-center" value="1">
+                           <input id="numOfCase" type="text" class="form-control text-center" value="0">
                            <button id="cartPlus" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$ <span id="casePrice">59</span></h5>
+                        <h5>$ <span id="casePrice">0</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5 id="subTotal">$1,278</h5>
-                        <h5 id="tax">$0</h5>
-                        <h5 id="total">$1,278</h5>
+                        <h5>$ <span id="subTotal">0</span></h5>
+                        <h5>$ <span id="tax">5</span></h5>
+                        <h5>$ <span id="total">0</span></h5>
                      </div>
                   </div>
                </div>
@@ -107,14 +107,6 @@
         decrementCounter("numOfCase","casePrice",59);
       });
 
-      // let subTotalAmount = document.getElementById("subTotal");
-      // let txt1 = document.getElementById("phonePrice").innerText;
-      // let txt3 = parseInt(txt1);
-      // let txt2 = document.getElementById("casePrice").innerText;
-      // let txt4 = parseInt(txt2);
-      // let txt5 = txt3 + txt4;
-      // console.log(txt5);
-
       function incrementCounter(quantity,price,singleItemPrice){
          const current = document.getElementById(quantity).value; //item count
          const currentQuantity = parseInt(current);
@@ -122,14 +114,17 @@
          document.getElementById(quantity).value = newQuantity;
 
          const currentPrice = document.getElementById(price).innerText; //price
-         const totalIncrementedPrice = newQuantity * singleItemPrice;
+         var totalIncrementedPrice = newQuantity * singleItemPrice;
          document.getElementById(price).innerText = totalIncrementedPrice;
-
-         // document.getElementById(subTotal).innerText = totalIncrementedPrice;
-         // document.getElementById(tax).innerText = parseInt(2);
-         // document.getElementById(total).innerText = totalIncrementedPrice - 2;
-
+         
+         var subTotal = document.getElementById("subTotal").innerText; //subtotal
+         var currentSubTotal = parseInt(subTotal);
+         console.log(currentSubTotal);
+         document.getElementById("subTotal").innerText = currentSubTotal + singleItemPrice;
+         var tax = document.getElementById("tax").innerText;
+         document.getElementById("total").innerText = currentSubTotal + singleItemPrice - tax;
       }
+
 
       function decrementCounter(quantity,price,singleItemPrice){
          const current = document.getElementById(quantity).value; //item count
@@ -141,10 +136,13 @@
             const currentPrice = document.getElementById(price).innerText; //price
             const totalDecrementedPrice = newQuantity * singleItemPrice;
             document.getElementById(price).innerText = totalDecrementedPrice;
-
-         // document.getElementById(subTotal).innerText = totalDecrementedPrice;
-         // document.getElementById(tax).innerText = 2;
-         // document.getElementById(total).innerText = totalDecrementedPrice - 2;
+            
+            var subTotal = document.getElementById("subTotal").innerText; //subtotal
+            var currentSubTotal = parseInt(subTotal);
+            console.log(currentSubTotal);
+            document.getElementById("subTotal").innerText = currentSubTotal - singleItemPrice;
+            var tax = document.getElementById("tax").innerText;
+            document.getElementById("total").innerText = currentSubTotal - singleItemPrice - tax;
          }
       }
    </script>
